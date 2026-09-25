@@ -1,0 +1,5 @@
+{
+  "name": "cast-studio",
+  "owner": { "name": "AI Cast Studio", "url": "https://aicaststudio.com" },
+  "plugins": [{ "name": "cast-studio", "source": "./", "description": "AI Cast Studio: meet, cast and film an AI influencer from Claude Code." }]
+}

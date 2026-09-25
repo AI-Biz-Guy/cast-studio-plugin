@@ -1,0 +1,12 @@
+{
+  "name": "cast-studio",
+  "version": "1.0.0",
+  "description": "AI Cast Studio from Claude Code: meet an AI influencer, cast her look and voice, write scripts and film 15–20 second talking videos, all through the studio's MCP server.",
+  "author": { "name": "AI Cast Studio", "url": "https://aicaststudio.com" },
+  "homepage": "https://aicaststudio.com",
+  "repository": "https://github.com/AI-Biz-Guy/cast-studio",
+  "license": "MIT",
+  "keywords": ["ai-influencer", "video", "mcp", "elevenlabs", "content"],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/"
+}
