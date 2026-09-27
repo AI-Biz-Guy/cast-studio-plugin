@@ -38,8 +38,9 @@ Say what you want in plain words and Claude drives the studio's tools in order:
 2. **Shape her** — "Make her from Palermo", "funnier", rename her, change her handle. Free.
 3. **Pay** — nothing that costs money happens before a plan. Claude hands you a link; you pay on
    the website (Stripe), never in the terminal.
-4. **Cast her** — 100 credits. Three looks, three voices lettered A/B/C, her sets, her first scripts.
-   Pick a look, then a voice. Three redraws are included.
+4. **Cast** — 100 credits. One job makes the whole card: the portrait you met becomes the look,
+   the character sheet, a voice with two alternates (A/B/C), three sets, three scripts. Nothing to
+   pick. Every part can be changed afterwards; three redraws of the look or voice are included.
 5. **Film** — your own idea first ("why you should never put cream in carbonara"), or one of her
    scripts. 100 credits a video, about 5 minutes, one video at a time.
 6. **Download** — the captioned MP4, the clean MP4, or her whole kit as a ZIP. Free, unlimited.
@@ -51,13 +52,13 @@ retry (every paid tool takes an `idempotency_key`).
 
 ## Tools
 
-| Tool | What it does |
-| --- | --- |
-| `get_account` · `list_transactions` · `get_checkout_link` | Credits, plan, history, and the link to pay on the website |
-| `meet_influencer` · `tweak_influencer` · `edit_influencer` | Her story and portrait, changed in a sentence or a field |
-| `cast_influencer` · `redraw_looks` · `choose_look` · `redraw_voices` · `choose_voice` | Looks, voices A/B/C, sets, first scripts |
-| `write_script` · `list_scripts` · `film_video` · `wait_for_jobs` · `redo_video` | Scripts, filming, progress, redo |
-| `list_influencers` · `get_influencer` · `get_downloads` | Your studio, her page, signed download links |
+| Tool                                                                                               | What it does                                               |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `get_account` · `list_transactions` · `get_checkout_link`                                          | Credits, plan, history, and the link to pay on the website |
+| `meet_influencer` · `tweak_influencer` · `edit_influencer`                                         | Her story and portrait, changed in a sentence or a field   |
+| `cast_influencer` · `redraw_looks` · `redraw_voices` · `choose_voice` · `edit_sets`                | The whole card in one job; then the look, voice and sets   |
+| `write_script` · `rewrite_script` · `list_scripts` · `film_video` · `wait_for_jobs` · `redo_video` | Scripts, filming, progress, redo                           |
+| `list_influencers` · `get_influencer` · `get_downloads`                                            | Your studio, her page, signed download links               |
 
 The server is `https://aicaststudio.com/mcp` (MCP Streamable HTTP, OAuth 2.1 with dynamic client
 registration). Discovery: `/.well-known/oauth-protected-resource/mcp`. Any MCP client works; this
@@ -65,11 +66,11 @@ plugin adds the config and a skill that teaches Claude the flow.
 
 ## Pricing
 
-| | Price | Credits a month | Per video |
-| --- | --- | --- | --- |
-| Starter | $29 | 400 | $7.25 |
-| Creator | $79 | 1,150 | $6.87 |
-| Studio | $199 | 3,200 | $6.22 |
+|         | Price | Credits a month | Per video |
+| ------- | ----- | --------------- | --------- |
+| Starter | $29   | 400             | $7.25     |
+| Creator | $79   | 1,150           | $6.87     |
+| Studio  | $199  | 3,200           | $6.22     |
 
 New influencer 100 credits · video 100 · scripts, tweaks and downloads free · 3 redraws per
 influencer · top-up 400 for $29 · yearly is one month free.
