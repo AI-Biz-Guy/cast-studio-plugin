@@ -33,13 +33,13 @@ tool per screen. Sign-in is OAuth in the browser the first time (`/mcp` in Claud
    `rewrite_script` returns a job: `wait_for_jobs`. Look and voice lock when the first video films;
    story, sets and scripts stay editable; filmed videos never change.
 6. **Her first video** — the user's own idea first: `write_script { idea }` (free). Her own scripts
-   are in `list_scripts`. `film_video { post_id }` costs **100 credits**: estimate first, say the
+   are in `list_scripts`, each with its `credits` (5 a second of its length at their pace, 10–60 s; a 20-second script is 100) and `estimatedSeconds`. `film_video { post_id }` charges that price: estimate first, say the
    price, then film. Filming takes about 5 minutes: `wait_for_jobs` until `done`. One video at a
    time; never film several without the user choosing each one.
 7. **Download** — `get_downloads` gives signed links (24 h): the captioned MP4, the clean MP4, and
    her whole kit as a ZIP. Downloads are free and unlimited.
 8. **Redo** — `redo_video { kind }`: `edit` (captions on/off) is free and instant; `take` and
-   `words` film again for 100 (free once for her first video); `broken` re-films free. Estimate first.
+   `words` film again at the script's price (free once for her first video); `broken` re-films free. Estimate first.
 
 ## Rules
 
