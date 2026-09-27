@@ -42,7 +42,7 @@ Say what you want in plain words and Claude drives the studio's tools in order:
    the character sheet, a voice with two alternates (A/B/C), three sets, three scripts. Nothing to
    pick. Every part can be changed afterwards; three redraws of the look or voice are included.
 5. **Film** — your own idea first ("why you should never put cream in carbonara"), or one of her
-   scripts. Talking (a chest-up talking head) is 5 credits a second of the script at their pace, a 20-second video is 100; Scene (acted out in the sets, when the studio offers it) is 10 a second. About 5 minutes, one video at a time.
+   scripts. Talking (a chest-up talking head) is 5 credits a second of the script at their pace, a 20-second video is 100; Scene (acted out in the sets, shot by shot, with a retake per shot) is 10 a second. About 5 minutes, one video at a time.
 6. **Download** — the captioned MP4, the clean MP4, or her whole kit as a ZIP. Free, unlimited.
 7. **Redo** — fix the edit (free), a new take (the script's price again; free once for her first video), or report a
    broken render (re-filmed free).
@@ -72,7 +72,7 @@ plugin adds the config and a skill that teaches Claude the flow.
 | Creator | $79   | 1,150           | $6.87     |
 | Studio  | $199  | 3,200           | $6.22     |
 
-New influencer 100 credits · video 5 a second (10–60 s; 20 s = 100) · scripts, tweaks and downloads free · 3 redraws per
+New influencer 100 credits · Talking video 5 a second, Scene 10 (10–60 s; a 20 s Talking video is 100) · scripts, tweaks and downloads free · 3 redraws per
 influencer · top-up 400 for $29 · yearly is one month free.
 
 ## Good to know
