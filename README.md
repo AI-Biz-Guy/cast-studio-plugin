@@ -42,7 +42,7 @@ Say what you want in plain words and Claude drives the studio's tools in order:
    the character sheet, a voice with two alternates (A/B/C), three sets, three scripts. Nothing to
    pick. Every part can be changed afterwards; three redraws of the look or voice are included.
 5. **Film** — your own idea first ("why you should never put cream in carbonara"), or one of her
-   scripts. 5 credits a second of the script at their pace (a 20-second video is 100), about 5 minutes, one video at a time.
+   scripts. Talking (a chest-up talking head) is 5 credits a second of the script at their pace, a 20-second video is 100; Scene (acted out in the sets, when the studio offers it) is 10 a second. About 5 minutes, one video at a time.
 6. **Download** — the captioned MP4, the clean MP4, or her whole kit as a ZIP. Free, unlimited.
 7. **Redo** — fix the edit (free), a new take (the script's price again; free once for her first video), or report a
    broken render (re-filmed free).
@@ -52,13 +52,13 @@ retry (every paid tool takes an `idempotency_key`).
 
 ## Tools
 
-| Tool                                                                                               | What it does                                               |
-| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| `get_account` · `list_transactions` · `get_checkout_link`                                          | Credits, plan, history, and the link to pay on the website |
-| `meet_influencer` · `tweak_influencer` · `edit_influencer`                                         | Her story and portrait, changed in a sentence or a field   |
-| `cast_influencer` · `redraw_looks` · `redraw_voices` · `choose_voice` · `edit_sets`                | The whole card in one job; then the look, voice and sets   |
-| `write_script` · `rewrite_script` · `list_scripts` · `film_video` · `wait_for_jobs` · `redo_video` | Scripts, filming, progress, redo                           |
-| `list_influencers` · `get_influencer` · `get_downloads`                                            | Your studio, her page, signed download links               |
+| Tool                                                                                                               | What it does                                                 |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
+| `get_account` · `list_transactions` · `get_checkout_link`                                                          | Credits, plan, history, and the link to pay on the website   |
+| `meet_influencer` · `tweak_influencer` · `edit_influencer`                                                         | Her story and portrait, changed in a sentence or a field     |
+| `cast_influencer` · `redraw_looks` · `redraw_voices` · `choose_voice` · `edit_sets`                                | The whole card in one job; then the look, voice and sets     |
+| `write_script` · `rewrite_script` · `list_scripts` · `film_video` · `retake_shot` · `wait_for_jobs` · `redo_video` | Scripts, filming (Talking or Scene), progress, retakes, redo |
+| `list_influencers` · `get_influencer` · `get_downloads`                                                            | Your studio, her page, signed download links                 |
 
 The server is `https://aicaststudio.com/mcp` (MCP Streamable HTTP, OAuth 2.1 with dynamic client
 registration). Discovery: `/.well-known/oauth-protected-resource/mcp`. Any MCP client works; this
