@@ -2,7 +2,7 @@
   "mcpServers": {
     "cast-studio": {
       "type": "http",
-      "url": "https://aicaststudio.com/mcp"
+      "url": "https://app.aicaststudio.com/mcp"
     }
   }
 }

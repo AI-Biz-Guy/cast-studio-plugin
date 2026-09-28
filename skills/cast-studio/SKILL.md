@@ -5,14 +5,14 @@ description: Use when the user wants to create or run an AI influencer with AI C
 
 # AI Cast Studio, from Claude Code
 
-The `cast-studio` MCP server (https://aicaststudio.com/mcp) is the same studio as the website: one
+The `cast-studio` MCP server (https://app.aicaststudio.com/mcp) is the same studio as the website: one
 tool per screen. Sign-in is OAuth in the browser the first time (`/mcp` in Claude Code → authenticate).
 
 ## The flow, in order
 
 1. **Meet** — `meet_influencer { brief }`. Free. One sentence or a pasted brief becomes a character
    with a story and a first portrait, saved as _met_. Show the user her name, hometown, catchphrase
-   and the portrait link (`get_influencer` → `portraitUrl` is relative to https://aicaststudio.com).
+   and the portrait link (`get_influencer` → `portraitUrl` is relative to https://app.aicaststudio.com).
 2. **Shape the story** (free, any time) — `tweak_influencer { influencer_id, text, idempotency_key }` for "make them from Palermo" or
    "funnier". It returns an accepted job: use `wait_for_jobs` before showing the updated card. Before
    casting a look change redraws the portrait; after casting the drawn look stays (use `redraw_looks`).

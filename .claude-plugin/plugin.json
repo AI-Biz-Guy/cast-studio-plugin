@@ -1,6 +1,6 @@
 {
   "name": "cast-studio",
-  "version": "1.5.0",
+  "version": "1.8.0",
   "description": "AI Cast Studio from Claude Code: meet an AI influencer, cast the whole character card in one go, edit any part of it with a sentence, write scripts and film 15–20 second talking videos, all through the studio’s MCP server.",
   "author": {
     "name": "AI Cast Studio",

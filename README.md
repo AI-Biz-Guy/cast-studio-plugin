@@ -60,7 +60,7 @@ retry (every paid tool takes an `idempotency_key`).
 | `write_script` · `rewrite_script` · `list_scripts` · `film_video` · `retake_shot` · `wait_for_jobs` · `redo_video` | Scripts, filming (Talking or Scene), progress, retakes, redo |
 | `list_influencers` · `get_influencer` · `get_downloads`                                                            | Your studio, her page, signed download links                 |
 
-The server is `https://aicaststudio.com/mcp` (MCP Streamable HTTP, OAuth 2.1 with dynamic client
+The server is `https://app.aicaststudio.com/mcp` (MCP Streamable HTTP, OAuth 2.1 with dynamic client
 registration). Discovery: `/.well-known/oauth-protected-resource/mcp`. Any MCP client works; this
 plugin adds the config and a skill that teaches Claude the flow.
 
