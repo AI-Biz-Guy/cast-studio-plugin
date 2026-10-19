@@ -1,0 +1,17 @@
+{
+  "name": "cast-studio",
+  "owner": {
+    "name": "AI Cast Studio",
+    "email": "support@aicaststudio.com"
+  },
+  "metadata": {
+    "description": "AI Cast Studio: the official Cursor plugin marketplace."
+  },
+  "plugins": [
+    {
+      "name": "cast-studio",
+      "source": "./",
+      "description": "Make short vertical videos with your AI characters and post them, from your AI app. It always shows the price and waits for your yes before it spends credits or posts."
+    }
+  ]
+}

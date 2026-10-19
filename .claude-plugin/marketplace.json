@@ -1,11 +1,17 @@
 {
   "name": "cast-studio",
-  "owner": { "name": "AI Cast Studio", "url": "https://aicaststudio.com" },
+  "owner": {
+    "name": "AI Cast Studio",
+    "url": "https://aicaststudio.com"
+  },
+  "description": "AI Cast Studio: the official plugin marketplace.",
   "plugins": [
     {
       "name": "cast-studio",
       "source": "./",
-      "description": "AI Cast Studio: meet, cast and film an AI influencer from Claude Code."
+      "description": "Make short vertical videos with your AI characters and post them, from your AI app. It always shows the price and waits for your yes before it spends credits or posts.",
+      "version": "2.0.0",
+      "category": "Productivity"
     }
   ]
 }

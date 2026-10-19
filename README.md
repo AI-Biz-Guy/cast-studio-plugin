@@ -1,85 +1,77 @@
 <p align="center">
-  <img src="https://aicaststudio.com/showcase/nonna-mimi-queens-1.jpg" alt="Nonna Mimi, an AI influencer made with AI Cast Studio" width="220" style="border-radius:24px">
+  <img src="https://aicaststudio.com/brand/mark-512.png" alt="AI Cast Studio" width="120">
 </p>
 
-<h1 align="center">cast-studio</h1>
+<h1 align="center">AI Cast Studio for your AI app</h1>
 
 <p align="center">
-  Meet, cast and film an AI influencer from Claude Code.<br>
-  The <a href="https://aicaststudio.com">AI Cast Studio</a> plugin: one sentence in, a character with a face, a voice and 15–20 second talking videos out.
-</p>
-
-<p align="center">
-  <a href="https://aicaststudio.com">aicaststudio.com</a> ·
-  <a href="#install">Install</a> ·
-  <a href="#the-flow">The flow</a> ·
-  <a href="#tools">Tools</a> ·
-  <a href="#pricing">Pricing</a>
+  Make short vertical videos with your AI characters, and post them, from Claude Code, Codex,
+  Cursor, Claude or ChatGPT.<br>
+  <a href="https://aicaststudio.com/agents">Setup for every app</a> ·
+  <a href="./TOOLS.md">Tools</a> ·
+  <a href="https://aicaststudio.com/pricing">Pricing</a>
 </p>
 
 ---
 
+## What you can do
+
+- "Show me my characters and my credits."
+- "Make Maya a video about the 90-cent egg trick." The script is free; drawing the shots and
+  filming show the price and wait for your yes.
+- "Fix shot 2, add captions and music, then mark it Done."
+- "Post it Thursday at 7 pm to Instagram and TikTok." Posting always stops for you.
+- "What is going out this week?"
+
 ## Install
 
-```sh
-claude plugin marketplace add AI-Biz-Guy/cast-studio-plugin
-claude plugin install cast-studio@cast-studio
-```
+The easiest way: in AI Cast Studio, open **Settings → Connected apps**, pick your app and press
+**Copy setup prompt**, then paste it into your app. It installs everything and tells you the one
+step that needs you: signing in.
 
-Then, in Claude Code, run `/mcp`, pick **cast-studio** and authenticate. Sign-in is a 6-digit code
-sent to your email, then one consent screen. No password, no API key to paste.
+Or by hand:
 
-## The flow
+| App                   | Install                                                                                                            | Sign in                                           |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| Claude Code           | `claude plugin marketplace add AI-Biz-Guy/cast-studio-plugin` then `claude plugin install cast-studio@cast-studio` | `/mcp` → cast-studio → Authenticate               |
+| Codex                 | `codex plugin marketplace add AI-Biz-Guy/cast-studio-plugin` then `codex plugin add cast-studio@cast-studio`       | restart Codex, then `codex mcp login cast-studio` |
+| Cursor                | add `https://app.aicaststudio.com/mcp` to `~/.cursor/mcp.json` as `cast-studio`                                    | Cursor Settings → MCP → cast-studio → Connect     |
+| Claude.ai and Desktop | Customize → Connectors → Add custom connector → `https://app.aicaststudio.com/mcp`                                 | press Connect                                     |
+| ChatGPT               | Settings → Apps → Developer mode → Create app → `https://app.aicaststudio.com/mcp`, OAuth                          | press Connect                                     |
 
-Say what you want in plain words and Claude drives the studio's tools in order:
+Signing in opens AI Cast Studio in your browser: enter the code we email you, then press Allow. No
+password, and no API key unless you run scripts. Step by step, with troubleshooting:
+[aicaststudio.com/agents](https://aicaststudio.com/agents).
 
-1. **Meet her** — "Make me an 81-year-old nonna from Queens who roasts Gen Z cooking." Free: a
-   story, a catchphrase, a handle and a first portrait.
-2. **Shape her** — "Make her from Palermo", "funnier", rename her, change her handle. Free.
-3. **Pay** — nothing that costs money happens before a plan. Claude hands you a link; you pay on
-   the website (Stripe), never in the terminal.
-4. **Cast** — 100 credits. One job makes the whole card: the portrait you met becomes the look,
-   the character sheet, a voice with two alternates (A/B/C), three sets, three scripts. Nothing to
-   pick. Every part can be changed afterwards; three redraws of the look or voice are included.
-5. **Film** — your own idea first ("why you should never put cream in carbonara"), or one of her
-   scripts. Talking (a chest-up talking head) is 5 credits a second of the script at their pace, a 20-second video is 100; Scene (acted out in the sets, shot by shot, with a retake per shot) is 10 a second. About 5 minutes, one video at a time.
-6. **Download** — the captioned MP4, the clean MP4, or her whole kit as a ZIP. Free, unlimited.
-7. **Redo** — fix the edit (free), a new take (the script's price again; free once for her first video), or report a
-   broken render (re-filmed free).
+## Skills
 
-Claude always says the price before a paid step (`estimate_only`) and never charges twice on a
-retry (every paid tool takes an `idempotency_key`).
-
-## Tools
-
-| Tool                                                                                                               | What it does                                                 |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ |
-| `get_account` · `list_transactions` · `get_checkout_link`                                                          | Credits, plan, history, and the link to pay on the website   |
-| `meet_influencer` · `tweak_influencer` · `edit_influencer`                                                         | Her story and portrait, changed in a sentence or a field     |
-| `cast_influencer` · `redraw_looks` · `redraw_voices` · `choose_voice` · `edit_sets`                                | The whole card in one job; then the look, voice and sets     |
-| `write_script` · `rewrite_script` · `list_scripts` · `film_video` · `retake_shot` · `wait_for_jobs` · `redo_video` | Scripts, filming (Talking or Scene), progress, retakes, redo |
-| `list_influencers` · `get_influencer` · `get_downloads`                                                            | Your studio, her page, signed download links                 |
-
-The server is `https://app.aicaststudio.com/mcp` (MCP Streamable HTTP, OAuth 2.1 with dynamic client
-registration). Discovery: `/.well-known/oauth-protected-resource/mcp`. Any MCP client works; this
-plugin adds the config and a skill that teaches Claude the flow.
+- `cast-studio`: the guide. Short answers, then two to four choices.
+- `cast-studio-setup`: install, sign in, check, and fix the connection.
+- `make-a-video`: idea to posted, stopping before every spend and every post.
+- `whats-going-out`: what is scheduled, what posted, and what didn't.
 
 ## Pricing
 
-|         | Price | Credits a month | Per video |
-| ------- | ----- | --------------- | --------- |
-| Starter | $29   | 400             | $7.25     |
-| Creator | $79   | 1,150           | $6.87     |
-| Studio  | $199  | 3,200           | $6.22     |
+|         | Price | Credits a month | Per 20-second video |
+| ------- | ----- | --------------- | ------------------- |
+| Starter | $29   | 400             | $7.76               |
+| Creator | $79   | 1,150           | $7.35               |
+| Studio  | $199  | 3,200           | $6.65               |
 
-New influencer 100 credits · Talking video 5 a second, Scene 10 (10–60 s; a 20 s Talking video is 100) · scripts, tweaks and downloads free · 3 redraws per
-influencer · top-up 400 for $29 · yearly is one month free.
+A new character is 46 credits, with 3 free changes, then 12 credits a part.
+
+A video is its frames (8 plus 3 a shot) and its filming (4.5 credits a second, 10 to 30 seconds).
+
+A 20-second video of 3 shots is about 107 credits. Scripts and downloads are free; top-up 400 for $29.
+
+Your AI app shows the exact price before each step and waits for your yes.
 
 ## Good to know
 
-- Every influencer is fictional and ships with an AI disclosure in her bio. Turn on your
-  platform's AI label when you post.
-- Filming keeps going if you close Claude Code; `wait_for_jobs` picks it back up, and you get an email.
-- A render that fails on the studio's side refunds its credits automatically.
+- Credits are only spent after you say yes to a quote, and AI apps have a daily credit limit you set
+  in Settings → Connected apps.
+- Links to videos, frames and voices expire (a day for a finished video, an hour for the rest), and
+  anyone with a link can open it until then.
+- Every character is fictional and says she is AI. Turn on your platform's AI label when you post.
 
 MIT licensed. Questions: support@aicaststudio.com.

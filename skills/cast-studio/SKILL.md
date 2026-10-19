@@ -1,54 +1,47 @@
 ---
 name: cast-studio
-description: Use when the user wants to create or run an AI influencer with AI Cast Studio — meet a character from one sentence, cast the whole character card in one go, edit any part of it, write scripts, film 15–20 second talking videos, redo or download them, or check credits. Drives the cast-studio MCP server tools in the right order and never spends credits without saying the price first.
+description: The AI Cast Studio guide and front door. Use when someone asks about AI Cast Studio, their characters, credits or videos, or does not know where to start. Short answers that end in two to four choices, then hands off to make-a-video, whats-going-out or cast-studio-setup.
 ---
 
-# AI Cast Studio, from Claude Code
+<!-- Generated from plugins/cast-studio/src/skills/cast-studio.md in the AI Cast Studio repo by `pnpm plugin`. Edit the source, not this copy. -->
 
-The `cast-studio` MCP server (https://app.aicaststudio.com/mcp) is the same studio as the website: one
-tool per screen. Sign-in is OAuth in the browser the first time (`/mcp` in Claude Code → authenticate).
+# AI Cast Studio guide
 
-## The flow, in order
+The rules (money, links, waiting, errors, sign-in) live on the cast-studio server: its instructions,
+each tool's description and every result's `next`. Follow those. This skill only sets the manner and
+the routes.
 
-1. **Meet** — `meet_influencer { brief }`. Free. One sentence or a pasted brief becomes a character
-   with a story and a first portrait, saved as _met_. Show the user her name, hometown, catchphrase
-   and the portrait link (`get_influencer` → `portraitUrl` is relative to https://app.aicaststudio.com).
-2. **Shape the story** (free, any time) — `tweak_influencer { influencer_id, text, idempotency_key }` for "make them from Palermo" or
-   "funnier". It returns an accepted job: use `wait_for_jobs` before showing the updated card. Before
-   casting a look change redraws the portrait; after casting the drawn look stays (use `redraw_looks`).
-   Use `edit_influencer` for the name, age, hometown or handle. Only what was asked changes.
-3. **Pay** — nothing that costs money happens before a plan. If `get_account` says `canSpend: false`,
-   give the user `get_checkout_link` and stop until they've paid (Starter $29 = 400 credits).
-4. **Cast** — `cast_influencer` costs **100 credits**. Always call it with `estimate_only: true`
-   first and tell the user the cost and balance before the real call. Then `wait_for_jobs` (it
-   long-polls 15 s; call it again while `done` is false). One job makes the whole card: the met
-   portrait becomes the look, the character sheet is drawn from it, three voices are auditioned and
-   the first saved (B and C stay as alternates), three sets are built, three scripts written. There is
-   nothing to pick.
-5. **Edit the card** (all free except the 3 included redraws) — `redraw_looks { notes }` draws one
-   new look and applies it (sheet redrawn); `redraw_voices { notes }` auditions three new voices and
-   saves the first; `choose_voice { voice_id }` switches to an alternate (`get_influencer` → `voices`,
-   lettered A/B/C, `voiceId` is the current one); `edit_sets { notes }` rethinks and redraws the three
-   sets; `rewrite_script { post_id, notes }` rewrites one unfilmed script. Each of these except
-   `rewrite_script` returns a job: `wait_for_jobs`. Look and voice lock when the first video films;
-   story, sets and scripts stay editable; filmed videos never change.
-6. **Her first video** — the user's own idea first: `write_script { idea }` (free). Her own scripts
-   are in `list_scripts`, each with its `credits` (5 a second of its length at their pace, 10–60 s; a 20-second script is 100) and `estimatedSeconds`. `film_video { post_id, mode? }` charges that price: `mode: "talking"` (default) is the chest-up talking head; `mode: "scene"` (only when `get_account` → `features.sceneMode` is true) acts the script out in the sets at the `prices.scene` figure (10 a second), with an optional one-line `direction`. Estimate first, say the
-   price, then film. Filming takes about 5 minutes: `wait_for_jobs` until `done`. One video at a
-   time; never film several without the user choosing each one.
-7. **Download** — `get_downloads` gives signed links (24 h): the captioned MP4, the clean MP4, and
-   her whole kit as a ZIP. Downloads are free and unlimited.
-8. **Retake a Scene shot** — a filmed Scene video lists `shots` (index, words, `credits` = that shot's seconds × 10); `retake_shot { post_id, shot }` generates that one shot again and re-cuts the video. Estimate first.
-9. **Redo** — `redo_video { kind }`: `edit` (captions on/off) is free and instant; `take` and
-   `words` film again at the script's price (free once for her first Talking video); `broken` re-films free on Talking. On a Scene video every redo is paid; use `retake_shot` for one shot. Estimate first.
+## How to answer
 
-## Rules
+- Lead with the answer in one or two short sentences, in the app's own words: Idea, Script, Shots,
+  Film, Finish, Done, Post, Schedule.
+- End every reply with two to four numbered choices the person can answer with a number. One of them
+  is usually the next step in their video.
+- Spend nothing from here. Anything that costs credits or posts goes through make-a-video, which
+  stops for the person's yes.
+- Names, not ids. Links, not files: never download media or paste base64.
 
-- Say the price on every paid step before doing it; `estimate_only: true` exists for that.
-- Pass a fresh `idempotency_key` on `tweak_influencer` (required), `cast_influencer`, `film_video` and `redo_video`; if a call
-  times out, retry with the same key — it never charges twice.
-- Tool errors come back as `{ error: { code, message } }`. `no_plan`, `past_due` and
-  `insufficient_credits` mean the user has to act on the website (`get_checkout_link`). `internal`
-  is a snag on the studio's side: try again later, or email support@aicaststudio.com.
-- Every influencer is fictional and ships with an AI disclosure in her bio; remind the user to turn
-  on their platform's AI label when they post.
+## First look
+
+Call `get_studio` (free): her characters with their status lines, the credits, and what needs the
+person. If it fails with a sign-in problem, hand off to cast-studio-setup.
+
+## Hand off
+
+| The person wants                                                     | Go to                                                             |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| a video: an idea, a script, filming, finishing, posting              | make-a-video                                                      |
+| what is going out, what posted, what didn't                          | whats-going-out                                                   |
+| to install, sign in, fix the connection, connect Instagram or TikTok | cast-studio-setup                                                 |
+| a new character                                                      | `create_character` (it quotes first: say the price, wait for yes) |
+| to change a character (voice, look, personality)                     | `update_character`                                                |
+| to pay or top up                                                     | `get_checkout_link` (paying is always on the website)             |
+
+Name the hand-off the way this app starts a skill (Claude Code: `/cast-studio:make-a-video`; Codex:
+`$make-a-video`); anywhere else, just carry on.
+
+## Words
+
+- **Finish**: the step after filming: captions, text on screen, end card, music, or fixing one shot.
+- **Done**: locks a filmed video and makes its 1080p file; only a Done video posts. Reopen undoes it.
+- **Look**: what she wears and how she is framed in one video; her face and voice stay the same.

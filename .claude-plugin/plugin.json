@@ -1,15 +1,17 @@
 {
   "name": "cast-studio",
-  "version": "1.8.0",
-  "description": "AI Cast Studio from Claude Code: meet an AI influencer, cast the whole character card in one go, edit any part of it with a sentence, write scripts and film 15–20 second talking videos, all through the studio’s MCP server.",
+  "version": "2.0.0",
+  "description": "Make short vertical videos with your AI characters and post them, from your AI app. It always shows the price and waits for your yes before it spends credits or posts.",
   "author": {
     "name": "AI Cast Studio",
+    "email": "support@aicaststudio.com",
     "url": "https://aicaststudio.com"
   },
-  "homepage": "https://aicaststudio.com",
+  "homepage": "https://aicaststudio.com/agents",
   "repository": "https://github.com/AI-Biz-Guy/cast-studio-plugin",
   "license": "MIT",
-  "keywords": ["ai-influencer", "video", "mcp", "elevenlabs", "content"],
+  "keywords": ["ai-video", "ai-characters", "short-video", "tiktok", "instagram", "mcp"],
+  "displayName": "AI Cast Studio",
   "mcpServers": "./.mcp.json",
   "skills": "./skills/"
 }

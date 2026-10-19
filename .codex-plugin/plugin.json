@@ -1,0 +1,36 @@
+{
+  "name": "cast-studio",
+  "version": "2.0.0",
+  "description": "Make short vertical videos with your AI characters and post them, from your AI app. It always shows the price and waits for your yes before it spends credits or posts.",
+  "author": {
+    "name": "AI Cast Studio",
+    "email": "support@aicaststudio.com",
+    "url": "https://aicaststudio.com"
+  },
+  "homepage": "https://aicaststudio.com/agents",
+  "repository": "https://github.com/AI-Biz-Guy/cast-studio-plugin",
+  "license": "MIT",
+  "keywords": ["ai-video", "ai-characters", "short-video", "tiktok", "instagram", "mcp"],
+  "skills": "./skills/",
+  "mcpServers": {
+    "cast-studio": {
+      "url": "https://app.aicaststudio.com/mcp"
+    }
+  },
+  "interface": {
+    "displayName": "AI Cast Studio",
+    "shortDescription": "Make short vertical videos with your AI characters and post them, from your AI app. It always shows the price and waits for your yes before it spends credits or posts.",
+    "longDescription": "AI Cast Studio makes fictional AI characters with a face and a voice, and short vertical videos with them. From your AI app you can write a script from an idea, draw and film the shots, finish the video with captions and music, and schedule it to Instagram or TikTok. Every step that costs credits or posts stops for your yes; media comes back as links you can open.",
+    "developerName": "AI Cast Studio",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://aicaststudio.com/agents",
+    "privacyPolicyURL": "https://aicaststudio.com/privacy",
+    "termsOfServiceURL": "https://aicaststudio.com/terms",
+    "defaultPrompt": [
+      "Show me my characters and how many credits I have.",
+      "Make a video with my character about an idea I have, and ask me before anything costs credits.",
+      "What is going out this week, and did anything fail to post?"
+    ]
+  }
+}
