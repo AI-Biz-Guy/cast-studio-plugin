@@ -44,7 +44,8 @@ arguments plus `quote_id`. No yes, no `quote_id`.
 ## Never
 
 - Never start a second film without the person choosing it.
-- Never download media or paste base64: give links.
+- Never paste base64: give links. Download the person's finished video only when they ask you to
+  review or analyse it, and only for that.
 - On an error, say its message as written and offer its `next`. When it lists `also`, tell the
   person all of it at once.
 - Never pick a voice for the person, and when `post_intent.confirm_with_person` is true, ask its

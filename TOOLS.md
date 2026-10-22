@@ -1,6 +1,6 @@
 # AI Cast Studio tools
 
-The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.0. Generated from the live server by `pnpm plugin`: do not edit by hand.
+The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.1. Generated from the live server by `pnpm plugin`: do not edit by hand.
 
 Every tool that spends credits answers first with a quote and spends only when called again with its `quote_id`; every tool that posts stops for the person. Errors carry `next`, the call that fixes them.
 
@@ -70,7 +70,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## make_video
 
-**Make a video, start to finish.** The whole flow in one tool: idea → script → shots → film → finish → Done → post. Start with character_id and idea (optionally format, words_exactly, and when and where to post it): the script is written in the background, so the start answers at once with stop wait, video_id and job_id (wait_for_job, then make_video with video_id), and the same start again (start_key, or the same idea within 10 minutes) answers the same video, never a second; carry on with video_id (post_when and post_to are saved on the video: every next and resume carries them, and post_video's next says them). Each call does the free work and stops at the next decision, saying it in "stop" with the one call to make in "next". It stops at: draw_frames (drawing a frame per shot costs credits), voice_check (once, before a character's first film: the voices against the character’s voice brief, since the voice locks when the first video films; step voice_check keeps it), film (filming costs credits), refilm (a paid re-film, once the free one is used), wait (something is being made: wait_for_job, then the call in resume), fix_shots (a frame to fix before filming), change_shot (the video service turned a shot down), review (filmed: watch it, edit with finish_video, then Done), post (Done: posting is post_video, never done here), archived. Before a spend it says every spend left on the way to Done and whether they fit today's AI-app limit (ahead). A failed film's first re-film is free and runs on its own. To go past a stop, call again with step set to it: a spend answers needs_confirmation with the price in credits and about $ and charges only with quote_id after the person says yes.
+**Make a video, start to finish.** The whole flow in one tool: idea → script → shots → film → finish → Done → post. Start with character_id and idea (optionally format, words_exactly, how it looks, and when and where to post it): the script is written in the background, so the start answers at once with stop wait, video_id and job_id (wait_for_job, then make_video with video_id), and the same start again (start_key, or the same idea within 10 minutes) answers the same video, never a second; carry on with video_id (post_when and post_to are saved on the video: every next and resume carries them, and post_video's next says them). How it looks (outfit, eyes, framing, in_view, direction, hook_on_screen: the same as write_script look and hook_text) goes with the start or with video_id before the frames are drawn, never with step; the words are never told it. The character's saved direction (for_her_next_videos) shapes the staging unless direction or the look fields are given. Each call does the free work and stops at the next decision, saying it in "stop" with the one call to make in "next". It stops at: draw_frames (drawing a frame per shot costs credits), voice_check (once, before a character's first film: the voices against the character’s voice brief, since the voice locks when the first video films; step voice_check keeps it), film (filming costs credits), refilm (a paid re-film, once the free one is used), wait (something is being made: wait_for_job, then the call in resume), fix_shots (a frame to fix before filming), change_shot (the video service turned a shot down), review (filmed: watch it, edit with finish_video, then Done), post (Done: posting is post_video, never done here), archived. Before a spend it says every spend left on the way to Done and whether they fit today's AI-app limit (ahead). A failed film's first re-film is free and runs on its own. To go past a stop, call again with step set to it: a spend answers needs_confirmation with the price in credits and about $ and charges only with quote_id after the person says yes.
 
 - `video_id`: Carry on with this video. Leave out to start one.
 - `character_id`: To start: the character (from get_studio).
@@ -81,6 +81,12 @@ Every tool that spends credits answers first with a quote and spends only when c
 - `step`: Go past this stop (from the last result’s next): draw_frames, film or refilm (spends, quoted first), voice_check (keeps the voice, free), done (marks it Done). One of: `draw_frames`, `voice_check`, `film`, `refilm`, `done`.
 - `post_when`: When the person wants it posted, in their words ("Thursday 7pm"); saved on the video and handed to post_video.
 - `post_to`: Where to post it (instagram, tiktok, youtube, facebook); saved on the video and handed to post_video.
+- `outfit`: What the character wears (up to 200 characters; "" clears it).
+- `eyes`: Eyes and makeup (up to 200 characters; "" clears it).
+- `framing`: How the character is framed ("waist up, centered") (up to 200 characters; "" clears it).
+- `in_view`: What must be in view (up to 200 characters; "" clears it).
+- `direction`: Style, movement and mood for the filming ("walking, selfie style").
+- `hook_on_screen`: True shows the hook text; false turns it off. The character’s next videos start the same way.
 - `quote_id`: Leave out at first: the tool answers needs_confirmation with a quote. After the person says yes, call again with the same arguments and quote.quote_id. Single use and also the idempotency key: retrying with it never charges twice.
 
 ## write_script
@@ -97,7 +103,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 - `note`: What to change ("shorter, about garlic"), up to 500 characters. (action rewrite)
 - `scope`: "staging" keeps every word (who is on screen, places only); "words" rewrites the words too. Default: staging for words written exactly, else words. (action rewrite) One of: `staging`, `words`.
 - `option`: The opener (script.hooks[].option). (action pick_hook)
-- `on`: True shows the hook text; the character’s next videos start the same way. (action hook_text)
+- `on`: True shows the hook text; false turns it off. The character’s next videos start the same way. (action hook_text)
 - `line`: The line, counted from 0 (0 is the opener). (action edit_line, delete_line)
 - `text`: The new words. (action edit_line)
 - `kind`: talking (said to the camera), narrated (the character on screen, voice over it), scene (the place, voice over it). (action edit_line) One of: `talking`, `narrated`, `scene`.
@@ -146,7 +152,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## finish_video
 
-**Finish a video: captions, text, end card, music, versions.** Free. The Finish step, over a filmed video (nothing is filmed again): "show" says what is on it now; "captions" (on/off, style, highlight, where; the character’s next videos start in the look you leave); "add_text" / "remove_text" (text on screen); "end_card" (a closing card with a line and the character’s handle; keeping "Made with AI Cast Studio" on it earns 10 credits back once); "music" puts a track made for this video on it, or takes it off (make_music makes one, paid); "versions" lists every saved edit and "restore" takes one back. Every edit that changes something saves a version (changed: false says it already looked like that). Fixing a shot is fix_shot. When the person is happy: set_video_state done.
+**Finish a video: captions, text, end card, music, versions.** Free. The Finish step, over a filmed video (nothing is filmed again): "show" says what is on it now (and makes its newest version into a file to watch when it has none); "captions" (on/off, style, highlight, where; the character’s next videos start in the look you leave); "add_text" / "remove_text" (text on screen); "end_card" (a closing card with a line and the character’s handle; keeping "Made with AI Cast Studio" on it earns 10 credits back once); "music" puts a track made for this video on it, or takes it off (make_music makes one, paid); "versions" lists every saved edit and "restore" takes one back. Every edit that changes something saves a version (changed: false says it already looked like that). Fixing a shot is fix_shot. When the person is happy: set_video_state done.
 
 - `action` (required): show: What is on the video now. captions: Change the captions. add_text: Add text on screen. remove_text: Remove one text on screen. end_card: Add, change or remove the end card. music: Put a track on it, or take the music off. versions: List every saved edit. restore: Take an earlier version back. One of: `show`, `captions`, `add_text`, `remove_text`, `end_card`, `music`, `versions`, `restore`.
 - `video_id` (required): The video (video_id from make_video, write_script or list_videos).
@@ -169,11 +175,12 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## make_music
 
-**Make music for a video.** Makes a music track for one filmed video, from a mood (Upbeat, Calm, Driving, Playful, Lo-fi) or your words: 30 credits, quoted first (show the price, then call again with quote_id after a yes). Nothing is filmed again; when it is ready it goes on the video if no other music was chosen (finish_video music picks or removes it). Starts a job: wait_for_job.
+**Make music for a video.** Makes a music track for one video. It needs the video filmed (while it is still filming: wait_for_job on the film first). From a mood (Upbeat, Calm, Driving, Playful, Lo-fi) or your words, at a volume (0 to 1, default 0.5); 30 credits, quoted first (show the price, then call again with quote_id after a yes). Nothing is filmed again; when it is ready it goes on the video by itself as a new version unless other music was chosen meanwhile (finish_video music changes or removes it). Starts a job: wait_for_job.
 
 - `video_id` (required): The video (video_id from make_video, write_script or list_videos).
 - `mood`: The mood. Or describe it. One of: `Upbeat`, `Calm`, `Driving`, `Playful`, `Lo-fi`.
 - `describe`: The music in your words.
+- `volume`: How loud it goes on, 0 to 1 (default 0.5).
 - `quote_id`: Leave out at first: the tool answers needs_confirmation with a quote. After the person says yes, call again with the same arguments and quote.quote_id. Single use and also the idempotency key: retrying with it never charges twice.
 
 ## set_video_state
@@ -270,10 +277,10 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## wait_for_job
 
-**Wait for a job.** Waits up to 25 seconds (wait_seconds, at most 45) for a job from any tool, then says where it is: its stage in the app's words, a real count ("2 of 3 shots filmed" while filming, counting only shots that came back; "2 of 3 frames drawn" while drawing frames; else "1 of 4 steps done"), how long it usually takes, and retry_after_seconds. Call it again while status is queued or running. Once it settles, next is always the call to make: a new character's voices to pick (with its character_id), make_video for a video, the watch link for a film or an edit. When a film fails it says what was kept, what was refunded, and the call that fixes it. Free.
+**Wait for a job.** Waits up to 25 seconds (wait_seconds, at most 50) for a job from any tool, then says where it is: its stage in the app's words, a real count ("2 of 3 shots filmed" while filming, counting only shots that came back; "2 of 3 frames drawn" while drawing frames; else "1 of 4 steps done"), how long it usually takes and about how long is left. While status is queued or running, call it again at once with next's args (the longest wait). Once it settles, next is always the call to make: a new character's voices to pick (with its character_id), make_video for a video, the watch link for a film or an edit (it says which version it plays). When a film fails it says what was kept, what was refunded, and the call that fixes it. Free.
 
 - `job_id` (required): The job, from the tool that started it.
-- `wait_seconds`: How long to wait for it to settle (default 25, capped at 45). 0 answers at once.
+- `wait_seconds`: How long to wait for it to settle (default 25, capped at 50). 0 answers at once.
 
 ## cancel_job
 

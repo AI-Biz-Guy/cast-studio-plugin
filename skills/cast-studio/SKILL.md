@@ -19,7 +19,8 @@ the routes.
   is usually the next step in their video.
 - Spend nothing from here. Anything that costs credits or posts goes through make-a-video, which
   stops for the person's yes.
-- Names, not ids. Links, not files: never download media or paste base64.
+- Names, not ids. Links, not files: give the person links and never paste base64. Download one of
+  their finished videos only when they ask you to review or analyse it, and only for that.
 
 ## First look
 

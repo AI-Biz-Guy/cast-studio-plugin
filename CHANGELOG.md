@@ -3,6 +3,20 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.1
+
+- `make_video` takes the look in the same call: outfit, eyes, framing, in view, direction and whether
+  the hook text shows. Exact words stay exact through the storyboard and the recording.
+- The script's seconds match the shots it plans.
+- `wait_for_job` waits up to 50 s and says when to call again; a track says it is already on, at
+  what volume and in which version; `make_music` takes a volume.
+- Every watch link says which version it plays and whether a newer one is still being made.
+- Shots say what she is doing, how the frame starts and what the judge checked.
+- `post_video` saves an edited caption, keeps a time zone named in the words, and points a refused
+  choice at the drafts.
+- A posted video says Posted in every tool; `get_studio` for one character points at `make_video`
+  and starts no background work.
+
 ## 2.0.0
 
 - One plugin for Claude Code, Codex and Cursor, plus setup steps for Claude.ai, Claude Desktop and
