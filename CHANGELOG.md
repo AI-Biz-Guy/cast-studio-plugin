@@ -3,6 +3,12 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.2
+
+- `connect_account` and `post_video` say what to expect from a platform still reviewing
+  AI Cast Studio (`review_note`, `review_notes`), in the same words the studio shows: connecting may
+  not go through yet, and TikTok and YouTube posts go up as private until each platform approves.
+
 ## 2.0.1
 
 - `make_video` takes the look in the same call: outfit, eyes, framing, in view, direction and whether

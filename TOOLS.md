@@ -1,6 +1,6 @@
 # AI Cast Studio tools
 
-The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.1. Generated from the live server by `pnpm plugin`: do not edit by hand.
+The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.2. Generated from the live server by `pnpm plugin`: do not edit by hand.
 
 Every tool that spends credits answers first with a quote and spends only when called again with its `quote_id`; every tool that posts stops for the person. Errors carry `next`, the call that fixes them.
 
