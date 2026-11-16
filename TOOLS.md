@@ -1,6 +1,6 @@
 # AI Cast Studio tools
 
-The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.2. Generated from the live server by `pnpm plugin`: do not edit by hand.
+The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.3. Generated from the live server by `pnpm plugin`: do not edit by hand.
 
 Every tool that spends credits answers first with a quote and spends only when called again with its `quote_id`; every tool that posts stops for the person. Errors carry `next`, the call that fixes them.
 
@@ -70,7 +70,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## make_video
 
-**Make a video, start to finish.** The whole flow in one tool: idea → script → shots → film → finish → Done → post. Start with character_id and idea (optionally format, words_exactly, how it looks, and when and where to post it): the script is written in the background, so the start answers at once with stop wait, video_id and job_id (wait_for_job, then make_video with video_id), and the same start again (start_key, or the same idea within 10 minutes) answers the same video, never a second; carry on with video_id (post_when and post_to are saved on the video: every next and resume carries them, and post_video's next says them). How it looks (outfit, eyes, framing, in_view, direction, hook_on_screen: the same as write_script look and hook_text) goes with the start or with video_id before the frames are drawn, never with step; the words are never told it. The character's saved direction (for_her_next_videos) shapes the staging unless direction or the look fields are given. Each call does the free work and stops at the next decision, saying it in "stop" with the one call to make in "next". It stops at: draw_frames (drawing a frame per shot costs credits), voice_check (once, before a character's first film: the voices against the character’s voice brief, since the voice locks when the first video films; step voice_check keeps it), film (filming costs credits), refilm (a paid re-film, once the free one is used), wait (something is being made: wait_for_job, then the call in resume), fix_shots (a frame to fix before filming), change_shot (the video service turned a shot down), review (filmed: watch it, edit with finish_video, then Done), post (Done: posting is post_video, never done here), archived. Before a spend it says every spend left on the way to Done and whether they fit today's AI-app limit (ahead). A failed film's first re-film is free and runs on its own. To go past a stop, call again with step set to it: a spend answers needs_confirmation with the price in credits and about $ and charges only with quote_id after the person says yes.
+**Make a video, start to finish.** The whole flow in one tool: idea → script → shots → film → finish → Done → post. Start with character_id and idea (optionally format, words_exactly, how it looks, and when and where to post it): the script is written in the background, so the start answers at once with stop wait, video_id and job_id (wait_for_job, then make_video with video_id), and the same start again (start_key, or the same idea within 10 minutes) answers the same video, never a second; carry on with video_id (post_when and post_to are saved on the video: every next and resume carries them, and post_video's next says them). How it looks (outfit, eyes, framing, in_view, direction, hook_on_screen: the same as write_script look and hook_text) goes with the start or with video_id before the frames are drawn, never with step; the words are never told it. The character's saved direction (for_her_next_videos) shapes the staging unless direction or the look fields are given. Each call does the free work and stops at the next decision, saying it in "stop" with the one call to make in "next". It stops at: draw_frames (drawing a frame per shot costs credits), voice_check (once, before a character's first film: the voices against the character’s voice brief, since the voice locks when the first video films; step voice_check keeps it), film (filming costs credits), refilm (a paid re-film, once the free one is used), wait (something is being made: wait_for_job, then the call in resume), fix_shots (a frame to fix before filming), change_shot (the video service turned a shot down), review (filmed: watch it, edit with finish_video, then Done), post (Done: posting is post_video, never done here), archived. Before a spend it says every spend left on the way to Done and whether they fit today's AI-app limit (ahead). A failed film's first re-film is free and runs on its own, but never a third time after it failed the same way twice; a failed fix_shot leaves the take before it. To go past a stop, call again with step set to it: a spend answers needs_confirmation with the price in credits and about $ and charges only with quote_id after the person says yes.
 
 - `video_id`: Carry on with this video. Leave out to start one.
 - `character_id`: To start: the character (from get_studio).
@@ -83,7 +83,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 - `post_to`: Where to post it (instagram, tiktok, youtube, facebook); saved on the video and handed to post_video.
 - `outfit`: What the character wears (up to 200 characters; "" clears it).
 - `eyes`: Eyes and makeup (up to 200 characters; "" clears it).
-- `framing`: How the character is framed ("waist up, centered") (up to 200 characters; "" clears it).
+- `framing`: How the character is framed ("waist up, centered"); frames are drawn at the nearest of chest-up, waist-up, mid-thigh, knees or whole body (up to 200 characters; "" clears it).
 - `in_view`: What must be in view (up to 200 characters; "" clears it).
 - `direction`: Style, movement and mood for the filming ("walking, selfie style").
 - `hook_on_screen`: True shows the hook text; false turns it off. The character’s next videos start the same way.
@@ -91,7 +91,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## write_script
 
-**Write and edit a script.** Free. The Script step: writes the character’s script from your idea and edits it until the words are right. action "formats" lists the formats; "write" writes a new video from an idea (optionally in a format, or "words_exactly" to use your words as written), in the background: it answers video_id and job_id at once, and wait_for_job's next shows the script; "rewrite" rewrites it from a note (scope "staging" keeps every word, "words" changes them too); "pick_hook" puts one of the three openers on line 0, "more_hooks" writes three more; "hook_text" turns the hook text over the video on or off (the character’s next videos start the same way); "edit_line" / "delete_line" change one line; "look" decides how this video looks (outfit, eyes, framing, what is in view), which every frame and shot follows. Needs the character’s voice picked first. Then plan_shots (or make_video for the whole flow). A video is filmed from its shots: plan_shots draws a frame per shot (8 plus 3 a shot), then film films them at 4.5 credits a second: about 107 credits in all for a 20-second video of 3 shots.
+**Write and edit a script.** Free. The Script step: writes the character’s script from your idea and edits it until the words are right. action "formats" lists the formats; "write" writes a new video from an idea (optionally in a format, or "words_exactly" to use your words as written), in the background: it answers video_id and job_id at once, and wait_for_job's next shows the script; "rewrite" rewrites it from a note (scope "staging" keeps every word, "words" changes them too); "pick_hook" puts one of the three openers on line 0, "more_hooks" writes three more; "hook_text" turns the hook text over the video on or off (the character’s next videos start the same way); "edit_line" / "delete_line" change one line; "look" decides how this video looks (outfit, eyes, framing, what is in view), which every frame and shot follows. Needs the character’s voice picked first. Then plan_shots (or make_video for the whole flow). A video is filmed from its shots: plan_shots draws a frame per shot (8 plus 3 a shot), then film films them at 4.5 credits a second: about 107 credits in all for a 20-second video of 3 shots. A film is billed for at least 10 seconds (45 credits), however short it is; fixing one shot is billed for at least 4 seconds (18 credits).
 
 - `action` (required): formats: List the formats a video can be written in. write: Write a new video from an idea. rewrite: Rewrite the script from a note. pick_hook: Put one of the openers on line 0. more_hooks: Write three more openers. hook_text: Turn the hook text over the video on or off. edit_line: Change one line: its words, its kind, or both. delete_line: Delete one line. look: Set how this video looks. One of: `formats`, `write`, `rewrite`, `pick_hook`, `more_hooks`, `hook_text`, `edit_line`, `delete_line`, `look`.
 - `character_id`: The character (from get_studio). (action write)
@@ -115,18 +115,19 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## plan_shots
 
-**Plan the shots.** The Shots step: a frame for each shot before anything is filmed. action "plan" plans the shots and draws a frame each (8 credits plus 3 a shot; again after the words change). Free: "edit_shot" (its words, length, place, framing, camera, what the character is doing), "remove_shot", "use_anyway" (keep a frame our check rejected). Paid (quoted first, then call again with quote_id after the person says yes): "add_shot" (3), "redraw_frame" (3, free after a rejection), "redraw_out_of_date" (every frame that no longer shows what its shot says). Drawing starts a job: wait_for_job, then get_video for the frames. Then film.
+**Plan the shots.** The Shots step: a frame for each shot before anything is filmed. action "plan" plans the shots and draws a frame each (8 credits plus 3 a shot; again after the words change). Free: "edit_shot" (its words, length, place, framing, camera, what the character is doing, where a narrated shot starts; shots[].kind says which fields a shot takes), "remove_shot", "use_anyway" (keep a frame our check rejected, or an out-of-date one, as it is). Paid (quoted first, then call again with quote_id after the person says yes): "add_shot" (3), "redraw_frame" (3, free after a rejection), "redraw_out_of_date" (every frame that no longer shows what its shot says). Drawing starts a job: wait_for_job, then get_video for the frames. Then film.
 
-- `action` (required): plan: Plan the shots and draw a frame each (quoted). edit_shot: Change one shot (free). add_shot: Add a shot and draw its frame (3 credits, quoted). remove_shot: Remove a shot (free). redraw_frame: Draw one frame again (3 credits, free after a rejection; quoted). use_anyway: Keep a frame our check rejected (free). redraw_out_of_date: Draw every out-of-date frame again (quoted) One of: `plan`, `edit_shot`, `add_shot`, `remove_shot`, `redraw_frame`, `use_anyway`, `redraw_out_of_date`.
+- `action` (required): plan: Plan the shots and draw a frame each (quoted). edit_shot: Change one shot (free). add_shot: Add a shot and draw its frame (3 credits, quoted). remove_shot: Remove a shot (free). redraw_frame: Draw one frame again (3 credits, free after a rejection; quoted). use_anyway: Keep a frame our check rejected, or an out-of-date one, as it is (free). redraw_out_of_date: Draw every out-of-date frame again (quoted) One of: `plan`, `edit_shot`, `add_shot`, `remove_shot`, `redraw_frame`, `use_anyway`, `redraw_out_of_date`.
 - `video_id` (required): The video (video_id from make_video, write_script or list_videos).
 - `shot`: The shot number, counted from 1 as the app shows it (shots[].shot). (action edit_shot, remove_shot, redraw_frame, use_anyway)
 - `words`: What is said in it. (action edit_shot, add_shot)
-- `seconds`: How long it runs. (action edit_shot)
-- `place`: Another place from its shot list (shots[].place). (action edit_shot)
-- `place_looks`: How its place looks in this video, in your words. (action edit_shot)
-- `framing`: How close: selfie, close, waist, full. (action edit_shot) One of: `selfie`, `close`, `waist`, `full`.
-- `camera`: still, push, pan or handheld. (action edit_shot) One of: `still`, `push`, `pan`, `handheld`.
-- `doing`: What the character is doing in it. (action edit_shot)
+- `seconds`: How long it runs. Any shot. (action edit_shot)
+- `place`: Another place from its shot list (shots[].place). Any shot. (action edit_shot)
+- `place_looks`: How its place looks in this video, in your words; the light you name here is the light. Any shot. (action edit_shot)
+- `framing`: How close: selfie, close (chest-up), waist, full. Talking and narrated shots, not a scene; a narrated shot set to selfie is drawn chest-up. (action edit_shot) One of: `selfie`, `close`, `waist`, `full`.
+- `camera`: still, push, pan or handheld. Scene shots only, not talking or narrated. (action edit_shot) One of: `still`, `push`, `pan`, `handheld`.
+- `doing`: What the character is doing in it. Talking and narrated shots, not a scene. (action edit_shot)
+- `frame_start`: Narrated shots only: where the action starts, as the frame is drawn ("lying under the blanket, phone in hand"). Changing doing or framing without it clears it, and the next redraw plans it again from what the character is doing. (action edit_shot)
 - `at`: The new shot’s number, from 1: 1 puts it first. (action add_shot)
 - `kind`: How it plays: talking (said to the camera), narrated or scene. (action add_shot) One of: `talking`, `narrated`, `scene`.
 - `note`: What to change ("closer, holding the map"). Optional. (action redraw_frame)
@@ -134,7 +135,7 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## film
 
-**Film a video from its shots.** Films a video from its planned shots (plan_shots first) and cuts it. Spends credits: the first call answers needs_confirmation with the price in credits and about $; show it to the person and ask, then call again with the same arguments plus quote_id only after a yes (a client that can ask in the chat asks there instead). action "film": film the whole video. action "refilm_failed": after a film that failed or stopped partway, films only the shots that did not film: free the first time, quoted after. A shot the video service turned down is changed with plan_shots, not filmed again. Starts a job and returns at once: then wait_for_job.
+**Film a video from its shots.** Films a video from its planned shots (plan_shots first) and cuts it, at 4.5 credits a filmed second; a film is billed for at least 10 seconds (45 credits), however short it is. Spends credits: the first call answers needs_confirmation with the price in credits and about $; show it to the person and ask, then call again with the same arguments plus quote_id only after a yes (a client that can ask in the chat asks there instead). action "film": film the whole video. action "refilm_failed": after a film that failed or stopped partway, films only the shots that did not film: free the first time, quoted after. A shot the video service turned down is changed with plan_shots, not filmed again. Starts a job and returns at once: then wait_for_job.
 
 - `action` (required): film: Film the whole video from its shots (quoted). refilm_failed: Film again only the shots that didn't film (free the first time) One of: `film`, `refilm_failed`.
 - `video_id` (required): The video (from list_videos or write_script).
@@ -201,9 +202,10 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## get_video
 
-**One video.** Everything about one video: where it is (lifecycle and the app’s status line), its script, its shots with a link to each frame and its state, its versions, and a fresh link to watch it once filmed (no sign-in; it says when it stops working, and anyone with the link can watch it until then). Free.
+**One video.** Everything about one video: where it is (lifecycle and the app’s status line), its script, its shots with a link to each frame and its state, its versions, and a fresh link to watch it once filmed (no sign-in; it says when it stops working, and anyone with the link can watch it until then). only "shots" answers just the video and its shots with their frame links (a small read). Free.
 
 - `video_id` (required): The video (video_id from make_video, write_script or list_videos).
+- `only`: "shots": just the shots and their frame links. Leave out for everything. One of: `shots`.
 
 ## get_downloads
 

@@ -3,6 +3,25 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.3
+
+- A `fix_shot` that fails or is cancelled leaves the take it started from: still watchable,
+  downloadable and fixable, and a free fix comes back. A free retry that fails the same way twice in
+  a row is not run again; `make_video` and `film` say so in plain words.
+- After a re-film the watch link is never the take before it: it is the new take as filmed while
+  its edit is made into a file (`render_job_id` on `make_video`'s review).
+- Captions off carries to the character's next videos, as `finish_video` says.
+- `get_downloads` links say which version they are (`version`, `latest`); `get_video` with
+  `only: "shots"` answers just the shots and their frame links.
+- `film` and its quote say a film is billed for at least 10 seconds.
+- A failed job always says why (`error.code` and plain words, with what happened to the credits),
+  and a job with every step done says it is finishing. `make_music` with a description the music
+  service refuses is tried once more in the service's suggested words, then says why.
+- `plan_shots`: `edit_shot` takes `frame_start`, and changing what a narrated shot shows clears the
+  old start; `use_anyway` keeps an out-of-date frame; `add_shot` is checked before its quote; each
+  field says which kinds of shot it applies to. A redraw note outranks the shot's start state.
+- `write_script` `formats` says what each format is and whether a voice is heard.
+
 ## 2.0.2
 
 - `connect_account` and `post_video` say what to expect from a platform still reviewing
