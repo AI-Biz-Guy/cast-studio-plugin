@@ -3,6 +3,12 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.4
+
+- Every shot that `get_video` (including `only: "shots"`) and `plan_shots` return carries
+  `drawn_with`, read-only: what its current frame was drawn from (the action, the start, the crop,
+  the note and the light the words asked for), so a frame can be checked against the shot.
+
 ## 2.0.3
 
 - A `fix_shot` that fails or is cancelled leaves the take it started from: still watchable,
