@@ -54,15 +54,15 @@ password, and no API key unless you run scripts. Step by step, with troubleshoot
 
 |         | Price | Credits a month | Per 20-second video |
 | ------- | ----- | --------------- | ------------------- |
-| Starter | $29   | 400             | $7.76               |
-| Creator | $79   | 1,150           | $7.35               |
-| Studio  | $199  | 3,200           | $6.65               |
+| Starter | $15   | 400             | $4.01               |
+| Creator | $39   | 1,150           | $3.63               |
+| Studio  | $99   | 3,200           | $3.31               |
 
 A new character is 46 credits, with 3 free changes, then 12 credits a part.
 
 A video is its frames (8 plus 3 a shot) and its filming (4.5 credits a second, 10 to 30 seconds).
 
-A 20-second video of 3 shots is about 107 credits. Scripts and downloads are free; top-up 400 for $29.
+A 20-second video of 3 shots is about 107 credits. Scripts and downloads are free; top-up 400 for $15.
 
 Your AI app shows the exact price before each step and waits for your yes.
 

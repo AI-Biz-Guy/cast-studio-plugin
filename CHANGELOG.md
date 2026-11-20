@@ -3,6 +3,11 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.6
+
+- Plans cost less: Starter $15, Creator $39, Studio $99 a month. Extra credits are 400 for $15.
+  `get_checkout_link` and the price table say the new prices.
+
 ## 2.0.5
 
 - With no plan, the first video: one finished 20-second video for $5, once, not a subscription.
