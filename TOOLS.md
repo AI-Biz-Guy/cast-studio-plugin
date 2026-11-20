@@ -1,6 +1,6 @@
 # AI Cast Studio tools
 
-The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.4. Generated from the live server by `pnpm plugin`: do not edit by hand.
+The tools the AI Cast Studio server (`https://app.aicaststudio.com/mcp`) lists, as of plugin 2.0.5. Generated from the live server by `pnpm plugin`: do not edit by hand.
 
 Every tool that spends credits answers first with a quote and spends only when called again with its `quote_id`; every tool that posts stops for the person. Errors carry `next`, the call that fixes them.
 
@@ -39,9 +39,10 @@ Every tool that spends credits answers first with a quote and spends only when c
 
 ## get_checkout_link
 
-**Pay in the browser.** Free; never charges. Paying always happens on the website: this gives the page to open, to choose or change a plan, or to top up (400 credits for $29). Give the person the link; once paid, get_studio shows the credits.
+**Pay in the browser.** Free; never charges. Paying always happens on the website: this gives the page to open, to choose or change a plan, to top up (400 credits for $29), or, for someone who has never had a plan, the first video: one finished 20-second video for $5, once, not a subscription. Give the person the link; once paid, get_studio shows the credits.
 
-- `what`: top_up (default when there is a plan): buy credits. plan: choose or change a plan. One of: `top_up`, `plan`.
+- `what`: top_up (default when there is a plan): buy credits. plan: choose or change a plan. first_video (default with no plan, when they may buy it): one finished video for $5, once. One of: `top_up`, `plan`, `first_video`.
+- `character_id`: The character the first video or plan is for (default: the newest).
 - `plan`: With what plan: the plan to open on. One of: `starter`, `creator`, `studio`.
 - `interval`: With what plan: monthly (default) or yearly. One of: `month`, `year`.
 

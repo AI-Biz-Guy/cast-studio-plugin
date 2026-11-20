@@ -3,6 +3,14 @@
 Each version of the AI Cast Studio plugin. `scripts/publish-plugin.sh` uses the entry for the version
 it publishes as the release note.
 
+## 2.0.5
+
+- With no plan, the first video: one finished 20-second video for $5, once, not a subscription.
+  `get_checkout_link` gives its page (`what: "first_video"`, the default when the person may buy
+  it, with `character_id`) beside the plans (`plans_url`); `get_studio` shows it under
+  `credits.first_video`, and a paid call refused for no plan offers it. Someone who bought it is
+  never told to buy a plan for that video.
+
 ## 2.0.4
 
 - Every shot that `get_video` (including `only: "shots"`) and `plan_shots` return carries
